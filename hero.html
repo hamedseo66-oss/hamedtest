@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Revita - Hero</title>
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;700;900&display=swap" rel="stylesheet" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Vazirmatn', sans-serif;
+      background-color: #f5ede4;
+      direction: rtl;
+    }
+
+    /* ===== NAVBAR ===== */
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 48px;
+      background-color: #f5ede4;
+    }
+
+    .logo {
+      font-size: 28px;
+      font-weight: 900;
+      color: #1a1a1a;
+      font-style: italic;
+      letter-spacing: -1px;
+    }
+
+    .logo span {
+      color: #e05a2b;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 32px;
+    }
+
+    nav ul li a {
+      text-decoration: none;
+      color: #333;
+      font-size: 14px;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    nav ul li a:hover,
+    nav ul li a.active {
+      color: #e05a2b;
+    }
+
+    .search-icon {
+      font-size: 18px;
+      cursor: pointer;
+      color: #333;
+    }
+
+    /* ===== HERO ===== */
+    .hero {
+      position: relative;
+      padding: 40px 48px 60px;
+      min-height: 520px;
+      overflow: hidden;
+    }
+
+    .hero-images {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      gap: 0;
+    }
+
+    /* تصویر اصلی - شخص روی تردمیل */
+    .img-main {
+      width: 55%;
+      max-width: 520px;
+      border-radius: 220px 220px 180px 180px;
+      object-fit: cover;
+      height: 420px;
+      display: block;
+      position: relative;
+      z-index: 2;
+    }
+
+    /* تصویر کوچک‌تر - وزنه‌برداری */
+    .img-secondary {
+      width: 28%;
+      max-width: 260px;
+      border-radius: 140px 140px 120px 120px;
+      object-fit: cover;
+      height: 300px;
+      margin-top: 60px;
+      margin-right: -40px;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* کارت متن */
+    .hero-text-card {
+      position: absolute;
+      bottom: 80px;
+      left: 80px;
+      background-color: #d6cbbf;
+      border-radius: 24px;
+      padding: 24px 32px;
+      z-index: 10;
+      max-width: 220px;
+    }
+
+    .hero-text-card p {
+      font-size: 22px;
+      font-weight: 400;
+      color: #2a2a2a;
+      line-height: 1.5;
+      direction: ltr;
+      text-align: left;
+    }
+
+    .hero-text-card p strong {
+      font-weight: 900;
+    }
+
+    /* آیکون آدمک */
+    .hero-icon {
+      position: absolute;
+      bottom: 72px;
+      left: 300px;
+      z-index: 10;
+      width: 52px;
+      opacity: 0.7;
+    }
+
+    /* دکوراسیون دایره پشت تصویر */
+    .circle-deco {
+      position: absolute;
+      width: 380px;
+      height: 380px;
+      border-radius: 50%;
+      background-color: #e8ddd4;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 0;
+    }
+
+    /* placeholder برای تصاویر */
+    .img-placeholder {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #c9b8a8;
+      color: #7a6a5a;
+      font-size: 13px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <header>
+    <span class="search-icon">🔍</span>
+    <nav>
+      <ul>
+        <li><a href="#" class="active">صفحه نخست</a></li>
+        <li><a href="#">درباره ما</a></li>
+        <li><a href="#">بلاگ</a></li>
+        <li><a href="#">منو کافه</a></li>
+        <li><a href="#">تماس با ما</a></li>
+      </ul>
+    </nav>
+    <div class="logo">R<span>e</span>vita</div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="circle-deco"></div>
+
+    <div class="hero-images">
+        <!-- تصویر اصلی -->
+      <img
+        class="img-main"
+        src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=600&q=80"
+        alt="تردمیل"
+      />
+      <!-- تصویر ثانوی -->
+      <img
+        class="img-secondary"
+        src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=400&q=80"
+        alt="باشگاه"
+      />
+    </div>
+
+    <!-- کارت متن -->
+    <div class="hero-text-card">
+      <p>
+        Peace in <strong>body</strong><br />
+        Move in <strong>life</strong>
+      </p>
+    </div>
+
+    <!-- آیکون آدمک -->
+    <div class="hero-icon">🏃</div>
+  </section>
+
+</body>
+</html>
