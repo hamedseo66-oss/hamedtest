@@ -3,205 +3,160 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Revita - Hero</title>
+  <title>Revita – Hero</title>
   <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;700;900&display=swap" rel="stylesheet" />
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
 
     body {
       font-family: 'Vazirmatn', sans-serif;
-      background-color: #f5ede4;
+      background-color: #f2e8de;
       direction: rtl;
     }
 
-    /* ===== NAVBAR ===== */
+    /* ── NAVBAR ── */
     header {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 18px 48px;
-      background-color: #f5ede4;
+      padding: 20px 52px;
     }
 
     .logo {
-      font-size: 28px;
+      font-size: 26px;
       font-weight: 900;
-      color: #1a1a1a;
       font-style: italic;
-      letter-spacing: -1px;
+      color: #1b2a3b;
+      letter-spacing: -0.5px;
     }
-
-    .logo span {
-      color: #e05a2b;
-    }
+    .logo em { color: #e05a2b; font-style: italic; }
 
     nav ul {
       list-style: none;
       display: flex;
-      gap: 32px;
+      gap: 36px;
     }
-
-    nav ul li a {
+    nav a {
       text-decoration: none;
       color: #333;
       font-size: 14px;
       font-weight: 500;
-      transition: color 0.2s;
     }
+    nav a.active { color: #e05a2b; font-weight: 700; }
 
-    nav ul li a:hover,
-    nav ul li a.active {
-      color: #e05a2b;
-    }
-
-    .search-icon {
-      font-size: 18px;
+    .search-btn {
+      background: none;
+      border: none;
       cursor: pointer;
       color: #333;
+      font-size: 18px;
     }
 
-    /* ===== HERO ===== */
+    /* ── HERO ── */
     .hero {
+      padding: 8px 36px 56px;
       position: relative;
-      padding: 40px 48px 60px;
-      min-height: 520px;
-      overflow: hidden;
     }
 
-    .hero-images {
+    /* ظرف اصلی */
+    .hero-inner {
       position: relative;
-      display: flex;
-      justify-content: center;
-      align-items: flex-start;
-      gap: 0;
+      border-radius: 48px;
+      overflow: visible; /* کارت باید بیرون بیاید */
     }
 
-    /* تصویر اصلی - شخص روی تردمیل */
-    .img-main {
-      width: 55%;
-      max-width: 520px;
-      border-radius: 220px 220px 180px 180px;
+    /* تصویر اصلی */
+    .hero-img {
+      width: 100%;
+      height: 480px;
       object-fit: cover;
-      height: 420px;
+      object-position: center 20%;
+      border-radius: 48px;
       display: block;
-      position: relative;
-      z-index: 2;
     }
 
-    /* تصویر کوچک‌تر - وزنه‌برداری */
-    .img-secondary {
-      width: 28%;
-      max-width: 260px;
-      border-radius: 140px 140px 120px 120px;
-      object-fit: cover;
-      height: 300px;
-      margin-top: 60px;
-      margin-right: -40px;
-      position: relative;
-      z-index: 1;
-    }
-
-    /* کارت متن */
-    .hero-text-card {
+    /* ── کارت "Peace in body / Move in life" ── */
+    .hero-card {
       position: absolute;
-      bottom: 80px;
-      left: 80px;
-      background-color: #d6cbbf;
-      border-radius: 24px;
-      padding: 24px 32px;
-      z-index: 10;
-      max-width: 220px;
+      bottom: -28px;
+      left: 48px;
+      background: #cce5f5;
+      border-radius: 36px;
+      padding: 28px 36px 28px 100px; /* فضا برای آیکون */
+      display: flex;
+      align-items: center;
+      min-width: 340px;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.08);
     }
 
-    .hero-text-card p {
-      font-size: 22px;
+    .hero-card p {
+      font-size: 26px;
+      line-height: 1.45;
+      color: #4a6278;
       font-weight: 400;
-      color: #2a2a2a;
-      line-height: 1.5;
       direction: ltr;
       text-align: left;
     }
 
-    .hero-text-card p strong {
+    .hero-card p strong {
       font-weight: 900;
+      color: #1b2a3b;
     }
 
-    /* آیکون آدمک */
+    /* ── آیکون آدمک ── */
     .hero-icon {
       position: absolute;
-      bottom: 72px;
-      left: 300px;
-      z-index: 10;
-      width: 52px;
-      opacity: 0.7;
+      bottom: -10px;
+      left: 40px;
+      width: 72px;
     }
 
-    /* دکوراسیون دایره پشت تصویر */
-    .circle-deco {
-      position: absolute;
-      width: 380px;
-      height: 380px;
-      border-radius: 50%;
-      background-color: #e8ddd4;
-      top: 20px;
-      left: 50%;
-      transform: translateX(-50%);
-      z-index: 0;
-    }
-
-    /* placeholder برای تصاویر */
-    .img-placeholder {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: #c9b8a8;
-      color: #7a6a5a;
-      font-size: 13px;
+    /* SVG آیکون آدمک ریویتا */
+    .revita-figure {
+      fill: none;
+      stroke: #1b2a3b;
+      stroke-width: 2.2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
     }
   </style>
 </head>
 <body>
 
-  <!-- NAVBAR -->
-  <header>
-    <span class="search-icon">🔍</span>
-    <nav>
-      <ul>
-        <li><a href="#" class="active">صفحه نخست</a></li>
-        <li><a href="#">درباره ما</a></li>
-        <li><a href="#">بلاگ</a></li>
-        <li><a href="#">منو کافه</a></li>
-        <li><a href="#">تماس با ما</a></li>
-      </ul>
-    </nav>
-    <div class="logo">R<span>e</span>vita</div>
-  </header>
+<!-- NAVBAR -->
+<header>
+  <button class="search-btn">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+      <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+    </svg>
+  </button>
 
-  <!-- HERO -->
-  <section class="hero">
-    <div class="circle-deco"></div>
+  <nav>
+    <ul>
+      <li><a href="#" class="active">صفحه نخست</a></li>
+      <li><a href="#">درباره ما</a></li>
+      <li><a href="#">بلاگ</a></li>
+      <li><a href="#">منو کافه</a></li>
+      <li><a href="#">تماس با ما</a></li>
+    </ul>
+  </nav>
 
-    <div class="hero-images">
-        <!-- تصویر اصلی -->
-      <img
-        class="img-main"
-        src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=600&q=80"
-        alt="تردمیل"
-      />
-      <!-- تصویر ثانوی -->
-      <img
-        class="img-secondary"
-        src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=400&q=80"
-        alt="باشگاه"
-      />
-    </div>
+  <div class="logo">R<em>e</em>vita</div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+
+    <!-- تصویر اصلی -->
+    <img
+      class="hero-img"
+      src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=1400&q=85"
+      alt="فیزیوتراپیست در حال کمک به ورزش روی تردمیل"
+    />
 
     <!-- کارت متن -->
-    <div class="hero-text-card">
+    <div class="hero-card">
       <p>
         Peace in <strong>body</strong><br />
         Move in <strong>life</strong>
@@ -209,8 +164,23 @@
     </div>
 
     <!-- آیکون آدمک -->
-    <div class="hero-icon">🏃</div>
-  </section>
+    <div class="hero-icon">
+      <svg viewBox="0 0 60 90" xmlns="http://www.w3.org/2000/svg">
+        <!-- سر -->
+        <circle cx="30" cy="10" r="7" class="revita-figure"/>
+        <!-- بدن -->
+        <line x1="30" y1="17" x2="30" y2="50" class="revita-figure"/>
+        <!-- دست‌ها - باز -->
+        <line x1="30" y1="28" x2="8"  y2="22" class="revita-figure"/>
+        <line x1="30" y1="28" x2="52" y2="22" class="revita-figure"/>
+        <!-- پاها -->
+        <line x1="30" y1="50" x2="14" y2="76" class="revita-figure"/>
+        <line x1="30" y1="50" x2="46" y2="76" class="revita-figure"/>
+      </svg>
+    </div>
+
+  </div>
+</section>
 
 </body>
 </html>
