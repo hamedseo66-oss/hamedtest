@@ -437,3 +437,23 @@ function royita_ajax_update_project_status() {
         'status_class' => $status_data['class'],
     ]);
 }
+
+// =====================================================
+// NEWSLETTER SUBSCRIBE
+// =====================================================
+add_action('wp_ajax_royita_newsletter_subscribe',        'royita_ajax_newsletter_subscribe');
+add_action('wp_ajax_nopriv_royita_newsletter_subscribe', 'royita_ajax_newsletter_subscribe');
+function royita_ajax_newsletter_subscribe() {
+    check_ajax_referer('royita_nonce', 'nonce');
+    $email = sanitize_email($_POST['email'] ?? '');
+    if (!is_email($email)) {
+        wp_send_json_error(['message' => 'ایمیل نامعتبر است.']);
+    }
+    $subscribers = get_option('royita_newsletter_subscribers', []);
+    if (in_array($email, $subscribers, true)) {
+        wp_send_json_error(['message' => 'این ایمیل قبلاً ثبت شده است.']);
+    }
+    $subscribers[] = $email;
+    update_option('royita_newsletter_subscribers', $subscribers);
+    wp_send_json_success(['message' => 'با موفقیت عضو شدید!']);
+}

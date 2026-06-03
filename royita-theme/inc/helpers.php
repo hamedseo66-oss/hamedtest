@@ -383,7 +383,7 @@ function royita_campaign_card(int $post_id): string {
             <div class="campaign-card__meta">
                 <?php if ($budget_min || $budget_max): ?>
                     <div class="campaign-card__meta-item">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/></svg>
                         <span>
                             <?php
                             if ($budget_min && $budget_max) {
@@ -456,4 +456,50 @@ function royita_format_deadline(string $deadline): string {
     if ($days === 1)   return '<span class="text-warning">فردا</span>';
     if ($days <= 7)    return '<span class="text-warning">' . $days . ' روز دیگر</span>';
     return $days . ' روز دیگر';
+}
+
+// =====================================================
+// PERMISSION HELPERS
+// =====================================================
+
+/**
+ * Can the current user submit proposals?
+ */
+function royita_can_submit_proposals(): bool {
+    return is_user_logged_in() && (current_user_can('submit_proposals') || royita_is_creator());
+}
+
+/**
+ * Can the current user access a specific project?
+ *
+ * @param int $project_id Project post ID
+ */
+function royita_can_access_project(int $project_id): bool {
+    if (!is_user_logged_in()) return false;
+    if (current_user_can('manage_options')) return true;
+    $user_id      = get_current_user_id();
+    $brand_user   = (int) get_post_meta($project_id, 'project_brand_user', true);
+    $creator_user = (int) get_post_field('post_author', $project_id);
+    $brand_post   = get_posts(['post_type' => 'royita_brand', 'author' => $user_id, 'posts_per_page' => 1, 'fields' => 'ids']);
+    $brand_post_id  = !empty($brand_post) ? (int) $brand_post[0] : 0;
+    $project_brand  = (int) get_post_meta($project_id, 'project_brand', true);
+    return ($creator_user === $user_id) || ($brand_post_id > 0 && $project_brand === $brand_post_id);
+}
+
+// =====================================================
+// CAMPAIGN COUNT HELPER
+// =====================================================
+
+/**
+ * Get count of active campaigns
+ */
+function royita_get_active_campaign_count(): int {
+    $q = new WP_Query([
+        'post_type'      => 'royita_campaign',
+        'post_status'    => 'publish',
+        'posts_per_page' => 1,
+        'meta_query'     => [['key' => 'campaign_status', 'value' => 'active', 'compare' => '=']],
+        'fields'         => 'ids',
+    ]);
+    return (int) $q->found_posts;
 }

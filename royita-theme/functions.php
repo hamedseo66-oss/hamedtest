@@ -140,13 +140,8 @@ function royita_enqueue_assets() {
         ]);
     }
 
-    // Google Fonts (Vazirmatn as RTL fallback)
-    wp_enqueue_style(
-        'royita-fonts',
-        'https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;600;700;800&display=swap',
-        [],
-        null
-    );
+    // Note: Google Fonts removed due to GDPR concerns.
+    // Use a self-hosted font plugin (e.g. OMGF) or rely on the CSS font stack in main.css.
 }
 
 // =====================================================
@@ -189,6 +184,7 @@ $royita_includes = [
     '/inc/menus.php',
     '/inc/ajax-handlers.php',
     '/inc/notifications.php',
+    '/inc/schema.php',
 ];
 
 foreach ($royita_includes as $file) {
@@ -196,6 +192,29 @@ foreach ($royita_includes as $file) {
     if (file_exists($path)) {
         require_once $path;
     }
+}
+
+// =====================================================
+// REGISTER SIDEBARS
+// =====================================================
+add_action('widgets_init', 'royita_register_sidebars');
+function royita_register_sidebars() {
+    register_sidebar([
+        'name'          => __('سایدبار اصلی', 'royita'),
+        'id'            => 'main-sidebar',
+        'before_widget' => '<div id="%1$s" class="sidebar-widget %2$s">',
+        'after_widget'  => '</div>',
+        'before_title'  => '<h3 class="sidebar-widget__title">',
+        'after_title'   => '</h3>',
+    ]);
+    register_sidebar([
+        'name'          => __('سایدبار بلاگ', 'royita'),
+        'id'            => 'blog-sidebar',
+        'before_widget' => '<div id="%1$s" class="sidebar-widget %2$s">',
+        'after_widget'  => '</div>',
+        'before_title'  => '<h3 class="sidebar-widget__title">',
+        'after_title'   => '</h3>',
+    ]);
 }
 
 // =====================================================
@@ -247,7 +266,7 @@ add_filter('script_loader_tag', 'royita_defer_scripts', 10, 3);
 function royita_defer_scripts($tag, $handle, $src) {
     $defer_scripts = ['royita-main', 'royita-dashboard'];
     if (in_array($handle, $defer_scripts, true)) {
-        return '<script src="' . esc_url($src) . '" defer></script>' . "\n";
+        return str_replace('<script ', '<script defer ', $tag);
     }
     return $tag;
 }
