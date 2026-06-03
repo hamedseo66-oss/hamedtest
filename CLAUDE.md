@@ -337,4 +337,90 @@ royita-theme/
 
 ---
 
+## راهنمای راه‌اندازی (Setup Guide)
+
+### مرحله ۱ — راه‌اندازی اولیه هاست
+```
+۱. نصب وردپرس (Softaculous)
+۲. زبان فارسی: Settings → General → Language
+۳. فعال‌سازی SSL (Let's Encrypt)
+۴. آدرس سایت را HTTPS کن
+```
+
+### مرحله ۲ — نصب قالب و افزونه‌ها (به ترتیب)
+```
+۱. Hello Elementor          ← از مخزن وردپرس
+۲. royita-theme (child)     ← آپلود از GitHub
+۳. Elementor Pro            ← آپلود + لایسنس
+۴. ACF Pro                  ← آپلود + لایسنس
+۵. Ultimate Member          ← از مخزن وردپرس
+۶. WooCommerce              ← از مخزن وردپرس
+۷. زرین‌پال for WooCommerce ← آپلود
+```
+
+### مرحله ۳ — تنظیمات پایه وردپرس
+```
+۱. Permalinks: Settings → Permalinks → Post name → Save
+۲. ساخت صفحات پایه:
+   ├── خانه
+   ├── کمپین‌ها
+   ├── کریتورها
+   ├── ورود
+   ├── ثبت‌نام
+   └── داشبورد
+۳. Settings → Reading → Homepage: صفحه خانه
+```
+
+### مرحله ۴ — راه‌اندازی Ultimate Member
+```
+۱. UM → Settings → General:
+   ├── Login page    → صفحه ورود
+   ├── Register page → صفحه ثبت‌نام
+   └── Profile page  → پروفایل
+۲. ساخت User Roles:
+   ├── brand_owner
+   └── creator_user
+۳. ساخت ۲ فرم ثبت‌نام:
+   ├── فرم برند    (فیلدهای brand_*)
+   └── فرم کریتور (فیلدهای creator_*)
+```
+
+### مرحله ۵ — راه‌اندازی ACF Pro
+```
+ACF → Field Groups → ساخت گروه‌های زیر:
+├── Campaign Fields    (location: royita_campaign)
+├── Creator Fields     (location: royita_creator)
+├── Proposal Fields    (location: royita_proposal)
+└── Project Fields     (location: royita_project)
+
+فیلدها از بخش CPT همین فایل کپی شوند.
+نکته: inc/acf-fields.php غیرفعال است — فیلدها از UI خود ACF مدیریت می‌شوند.
+```
+
+### مرحله ۶ — طراحی با Elementor Pro
+```
+۱. Theme Builder → Header (سایت‌وایدِ)
+۲. Theme Builder → Footer (سایت‌وایدِ)
+۳. صفحه خانه با Elementor
+۴. صفحه کمپین‌ها
+۵. صفحه کریتورها
+```
+
+### مرحله ۷ — WooCommerce + زرین‌پال
+```
+۱. WooCommerce Setup Wizard را رد کن
+۲. درگاه زرین‌پال را با API Key تنظیم کن
+۳. یک محصول مجازی برای "پرداخت کمپین" بساز
+```
+
+### Roadmap MVP
+```
+هفته ۱: هاست + قالب + UM + فرم ثبت‌نام برند/کریتور
+هفته ۲: ACF + فیلدها + صفحه اصلی Elementor
+هفته ۳: سیستم کمپین + پیشنهاد (AJAX از کد موجود)
+هفته ۴: پرداخت + تست + لانچ
+```
+
+---
+
 *آخرین به‌روزرسانی: خرداد ۱۴۰۵*
