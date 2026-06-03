@@ -1,0 +1,5 @@
+/* RTL Overrides for Elementor Compatibility */
+.elementor-widget-container { direction: rtl; text-align: right; }
+.elementor-nav-menu .elementor-nav-menu--main { direction: rtl; }
+.eael-woo-product-gallery { direction: rtl; }
+select { background-position: left 12px center; }

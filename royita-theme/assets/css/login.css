@@ -1,0 +1,45 @@
+body.login { background: #F0F7FF; direction: rtl; }
+body.login #login { padding-top: 2rem; }
+body.login h1 a {
+    background-image: none;
+    font-size: 2rem;
+    font-weight: 800;
+    color: #1A6DC7;
+    text-decoration: none;
+    font-family: 'IRANSansX', Tahoma, sans-serif;
+}
+body.login h1 a::before { content: 'رویتا'; }
+#loginform, #registerform, #lostpasswordform {
+    border-radius: 12px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+    border: none;
+    padding: 2rem;
+}
+.login label { color: #374151; font-weight: 600; }
+.login input[type="text"],
+.login input[type="password"],
+.login input[type="email"] {
+    border: 1.5px solid #D1D5DB;
+    border-radius: 8px;
+    padding: 10px 14px;
+    font-size: 15px;
+    direction: ltr;
+}
+.login input[type="text"]:focus,
+.login input[type="password"]:focus {
+    border-color: #1A6DC7;
+    box-shadow: 0 0 0 3px rgba(26,109,199,0.15);
+    outline: none;
+}
+.login #wp-submit {
+    background: #1A6DC7;
+    border: none;
+    border-radius: 8px;
+    padding: 12px 24px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+.login #wp-submit:hover { background: #1E4D94; }
+#nav a, #backtoblog a { color: #1A6DC7; }
