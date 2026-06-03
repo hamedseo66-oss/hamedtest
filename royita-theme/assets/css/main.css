@@ -1,0 +1,870 @@
+/**
+ * Royita Main CSS
+ * Complete styles for all components
+ *
+ * @package Royita
+ */
+
+/* =====================================================
+   IMPORT FONTS - IRANSansX via CDN
+   ===================================================== */
+@font-face {
+    font-family: 'IRANSansX';
+    src: url('https://cdn.royita.ir/fonts/IRANSansX-Regular.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'IRANSansX';
+    src: url('https://cdn.royita.ir/fonts/IRANSansX-Medium.woff2') format('woff2');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'IRANSansX';
+    src: url('https://cdn.royita.ir/fonts/IRANSansX-Bold.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'IRANSansX';
+    src: url('https://cdn.royita.ir/fonts/IRANSansX-ExtraBold.woff2') format('woff2');
+    font-weight: 800;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* =====================================================
+   PAGE WRAPPER
+   ===================================================== */
+.site {
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.site-main {
+    flex: 1;
+}
+
+/* Elementor body fix */
+body.elementor-page .site-main {
+    padding-top: 0;
+}
+
+/* =====================================================
+   CAMPAIGNS PAGE LAYOUT
+   ===================================================== */
+.campaigns-page {
+    padding-top: 100px;
+    padding-bottom: var(--space-16);
+}
+
+.campaigns-page__header {
+    background: linear-gradient(135deg, #0f4c8a 0%, var(--royita-primary) 100%);
+    padding: var(--space-16) 0;
+    margin-bottom: var(--space-8);
+}
+
+.campaigns-page__header-title {
+    font-size: var(--font-size-3xl);
+    font-weight: var(--font-extrabold);
+    color: #fff;
+    margin-bottom: var(--space-2);
+}
+
+.campaigns-page__header-subtitle {
+    font-size: var(--font-size-md);
+    color: rgba(255,255,255,0.8);
+}
+
+/* Search Bar */
+.search-bar {
+    position: relative;
+    max-width: 500px;
+    margin-top: var(--space-6);
+}
+
+.search-bar__input {
+    width: 100%;
+    padding: var(--space-3) var(--space-5) var(--space-3) 3rem;
+    border-radius: var(--radius-full);
+    border: none;
+    font-family: var(--font-primary);
+    font-size: var(--font-size-base);
+    box-shadow: var(--shadow-md);
+    direction: rtl;
+    text-align: right;
+}
+
+.search-bar__input:focus {
+    outline: 2px solid var(--royita-cta);
+}
+
+.search-bar__icon {
+    position: absolute;
+    left: var(--space-4);
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--royita-gray);
+}
+
+/* Results Count */
+.results-count {
+    font-size: var(--font-size-sm);
+    color: var(--royita-gray);
+    margin-bottom: var(--space-4);
+}
+
+/* No Results */
+.no-results {
+    text-align: center;
+    padding: var(--space-16) var(--space-8);
+    grid-column: 1 / -1;
+}
+
+.no-results__icon {
+    font-size: 4rem;
+    margin-bottom: var(--space-4);
+}
+
+/* =====================================================
+   CREATOR AVAILABILITY INDICATOR
+   ===================================================== */
+.availability-dot {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    margin-left: var(--space-1);
+}
+
+.availability-dot.available { background: var(--royita-success); }
+.availability-dot.busy      { background: var(--royita-warning); }
+.availability-dot.vacation  { background: var(--royita-gray-light); }
+
+/* =====================================================
+   STICKY HEADER ADJUSTMENTS
+   ===================================================== */
+body:not(.is-front-page) .site-main {
+    padding-top: 80px;
+}
+
+/* =====================================================
+   CAMPAIGN SORT & FILTER BAR
+   ===================================================== */
+.filter-sort-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--space-4) var(--space-5);
+    background: var(--royita-bg);
+    border: 1px solid var(--royita-border);
+    border-radius: var(--radius-lg);
+    margin-bottom: var(--space-6);
+    flex-wrap: wrap;
+    gap: var(--space-3);
+}
+
+/* =====================================================
+   PAGINATION
+   ===================================================== */
+.royita-pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-2);
+    margin-top: var(--space-10);
+}
+
+.royita-pagination a,
+.royita-pagination span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: var(--radius-md);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-medium);
+    border: 1px solid var(--royita-border);
+    text-decoration: none;
+    transition: all var(--transition-fast);
+    color: var(--royita-dark);
+}
+
+.royita-pagination a:hover {
+    border-color: var(--royita-primary);
+    color: var(--royita-primary);
+    background: var(--royita-primary-xlight);
+}
+
+.royita-pagination .current {
+    background: var(--royita-primary);
+    border-color: var(--royita-primary);
+    color: #fff;
+}
+
+/* =====================================================
+   DASHBOARD - PROPOSAL LIST
+   ===================================================== */
+.proposal-item {
+    background: var(--royita-bg);
+    border: 1px solid var(--royita-border);
+    border-radius: var(--radius-xl);
+    padding: var(--space-5);
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-4);
+    margin-bottom: var(--space-4);
+    transition: all var(--transition-fast);
+}
+
+.proposal-item:hover {
+    border-color: var(--royita-primary);
+    box-shadow: var(--shadow-md);
+}
+
+.proposal-item__avatar {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+}
+
+.proposal-item__info {
+    flex: 1;
+    min-width: 0;
+}
+
+.proposal-item__name {
+    font-size: var(--font-size-md);
+    font-weight: var(--font-semibold);
+    color: var(--royita-dark);
+    margin-bottom: var(--space-1);
+}
+
+.proposal-item__meta {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+    flex-wrap: wrap;
+    font-size: var(--font-size-sm);
+    color: var(--royita-gray);
+    margin-bottom: var(--space-3);
+}
+
+.proposal-item__cover {
+    font-size: var(--font-size-sm);
+    color: var(--royita-gray-dark);
+    line-height: var(--leading-relaxed);
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.proposal-item__actions {
+    display: flex;
+    gap: var(--space-2);
+    flex-shrink: 0;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+/* =====================================================
+   PROJECT TIMELINE
+   ===================================================== */
+.project-timeline {
+    position: relative;
+    padding-right: 2rem;
+}
+
+.project-timeline::before {
+    content: '';
+    position: absolute;
+    right: 7px;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: var(--royita-border);
+}
+
+.project-timeline-item {
+    position: relative;
+    padding-bottom: var(--space-6);
+    padding-right: var(--space-6);
+}
+
+.project-timeline-item::before {
+    content: '';
+    position: absolute;
+    right: -1.75rem;
+    top: 4px;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: var(--royita-primary);
+    border: 2px solid #fff;
+    box-shadow: 0 0 0 2px var(--royita-primary);
+}
+
+.project-timeline-item.completed::before {
+    background: var(--royita-success);
+    box-shadow: 0 0 0 2px var(--royita-success);
+}
+
+.project-timeline-item__date {
+    font-size: var(--font-size-xs);
+    color: var(--royita-gray);
+    margin-bottom: var(--space-1);
+}
+
+.project-timeline-item__title {
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-semibold);
+    color: var(--royita-dark);
+}
+
+/* =====================================================
+   FILE UPLOAD
+   ===================================================== */
+.file-upload-area {
+    border: 2px dashed var(--royita-border);
+    border-radius: var(--radius-xl);
+    padding: var(--space-10) var(--space-6);
+    text-align: center;
+    cursor: pointer;
+    transition: all var(--transition-base);
+    background: var(--royita-bg-alt);
+}
+
+.file-upload-area:hover,
+.file-upload-area.dragover {
+    border-color: var(--royita-primary);
+    background: var(--royita-primary-xlight);
+}
+
+.file-upload-area__icon {
+    font-size: 2.5rem;
+    margin-bottom: var(--space-3);
+}
+
+.file-upload-area__text {
+    font-size: var(--font-size-md);
+    font-weight: var(--font-semibold);
+    color: var(--royita-dark);
+    margin-bottom: var(--space-2);
+}
+
+.file-upload-area__hint {
+    font-size: var(--font-size-sm);
+    color: var(--royita-gray);
+}
+
+.file-upload-area input[type="file"] {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.file-preview-list {
+    margin-top: var(--space-4);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+}
+
+.file-preview-item {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    padding: var(--space-3) var(--space-4);
+    background: var(--royita-bg);
+    border: 1px solid var(--royita-border);
+    border-radius: var(--radius-md);
+    font-size: var(--font-size-sm);
+}
+
+.file-preview-item__name {
+    flex: 1;
+    color: var(--royita-dark);
+    font-weight: var(--font-medium);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.file-preview-item__size {
+    color: var(--royita-gray);
+}
+
+.file-preview-item__remove {
+    color: var(--royita-danger);
+    cursor: pointer;
+    padding: 2px;
+}
+
+/* =====================================================
+   NOTIFICATION BADGE
+   ===================================================== */
+.notification-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 18px;
+    height: 18px;
+    padding: 0 4px;
+    background: var(--royita-danger);
+    color: #fff;
+    font-size: 10px;
+    font-weight: var(--font-bold);
+    border-radius: var(--radius-full);
+    animation: pulse-badge 2s ease infinite;
+}
+
+/* =====================================================
+   PROGRESS BAR
+   ===================================================== */
+.progress-bar {
+    width: 100%;
+    height: 6px;
+    background: var(--royita-border);
+    border-radius: var(--radius-full);
+    overflow: hidden;
+}
+
+.progress-bar__fill {
+    height: 100%;
+    background: var(--royita-primary);
+    border-radius: var(--radius-full);
+    transition: width var(--transition-slow);
+}
+
+.progress-bar__fill.success { background: var(--royita-success); }
+.progress-bar__fill.warning { background: var(--royita-warning); }
+.progress-bar__fill.danger  { background: var(--royita-danger); }
+
+/* =====================================================
+   TABS (Generic)
+   ===================================================== */
+.tab-nav {
+    display: flex;
+    border-bottom: 2px solid var(--royita-border);
+    margin-bottom: var(--space-6);
+    gap: 0;
+}
+
+.tab-nav__item {
+    padding: var(--space-3) var(--space-6);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-medium);
+    color: var(--royita-gray);
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -2px;
+    transition: all var(--transition-fast);
+    background: none;
+    border-top: none;
+    border-right: none;
+    border-left: none;
+    font-family: var(--font-primary);
+}
+
+.tab-nav__item:hover {
+    color: var(--royita-primary);
+}
+
+.tab-nav__item.active {
+    color: var(--royita-primary);
+    border-bottom-color: var(--royita-primary);
+    font-weight: var(--font-semibold);
+}
+
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+    animation: fadeInUp 0.3s ease;
+}
+
+/* =====================================================
+   MODAL
+   ===================================================== */
+.royita-modal {
+    position: fixed;
+    inset: 0;
+    z-index: var(--z-modal);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-4);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity var(--transition-base);
+}
+
+.royita-modal.is-open {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.royita-modal__overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(4px);
+}
+
+.royita-modal__box {
+    position: relative;
+    background: var(--royita-bg);
+    border-radius: var(--radius-2xl);
+    padding: var(--space-8);
+    width: 100%;
+    max-width: 600px;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: var(--shadow-xl);
+    transform: translateY(20px);
+    transition: transform var(--transition-base);
+}
+
+.royita-modal.is-open .royita-modal__box {
+    transform: translateY(0);
+}
+
+.royita-modal__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: var(--space-6);
+}
+
+.royita-modal__title {
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-bold);
+    color: var(--royita-dark);
+}
+
+.royita-modal__close {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: var(--royita-bg-alt);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    border: none;
+    color: var(--royita-gray);
+}
+
+.royita-modal__close:hover {
+    background: var(--royita-danger-light);
+    color: var(--royita-danger);
+}
+
+/* =====================================================
+   PROPOSAL FORM (in Modal)
+   ===================================================== */
+.proposal-form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-5);
+}
+
+.proposal-form__price-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-4);
+}
+
+.char-counter {
+    font-size: var(--font-size-xs);
+    color: var(--royita-gray);
+    text-align: left;
+    margin-top: var(--space-1);
+}
+
+.char-counter.near-limit { color: var(--royita-warning); }
+.char-counter.at-limit   { color: var(--royita-danger); }
+
+/* =====================================================
+   FAVORITE BUTTON
+   ===================================================== */
+.btn-favorite {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 1px solid var(--royita-border);
+    background: var(--royita-bg);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    color: var(--royita-gray);
+    flex-shrink: 0;
+}
+
+.btn-favorite:hover,
+.btn-favorite.is-favorite {
+    border-color: #ef4444;
+    color: #ef4444;
+    background: #FEE2E2;
+}
+
+.btn-favorite.is-favorite svg {
+    fill: #ef4444;
+}
+
+/* =====================================================
+   EMPTY STATES
+   ===================================================== */
+.empty-state {
+    text-align: center;
+    padding: var(--space-16) var(--space-8);
+}
+
+.empty-state__icon {
+    font-size: 4rem;
+    margin-bottom: var(--space-4);
+    display: block;
+}
+
+.empty-state__title {
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-semibold);
+    color: var(--royita-dark);
+    margin-bottom: var(--space-2);
+}
+
+.empty-state__text {
+    font-size: var(--font-size-base);
+    color: var(--royita-gray);
+    margin-bottom: var(--space-6);
+}
+
+/* =====================================================
+   DASHBOARD WIDGET
+   ===================================================== */
+.dashboard-widget {
+    background: var(--royita-bg);
+    border: 1px solid var(--royita-border);
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+    margin-bottom: var(--space-6);
+}
+
+.dashboard-widget__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--space-5) var(--space-6);
+    border-bottom: 1px solid var(--royita-border);
+}
+
+.dashboard-widget__title {
+    font-size: var(--font-size-md);
+    font-weight: var(--font-semibold);
+    color: var(--royita-dark);
+}
+
+.dashboard-widget__body {
+    padding: var(--space-5) var(--space-6);
+}
+
+/* =====================================================
+   INLINE LOADING SPINNER
+   ===================================================== */
+.spinner {
+    width: 24px;
+    height: 24px;
+    border: 2px solid var(--royita-border);
+    border-top-color: var(--royita-primary);
+    border-radius: 50%;
+    animation: spin 0.7s linear infinite;
+    display: inline-block;
+}
+
+.spinner-sm { width: 16px; height: 16px; }
+.spinner-lg { width: 36px; height: 36px; border-width: 3px; }
+
+/* Center spinner */
+.loading-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-12);
+}
+
+/* =====================================================
+   RTL SPECIFIC ADJUSTMENTS
+   ===================================================== */
+/* Swap arrow directions for RTL */
+.arrow-rtl { transform: scaleX(-1); }
+
+/* Fix Elementor for RTL */
+.elementor-section {
+    direction: rtl;
+}
+
+/* WordPress admin bar RTL fix */
+#wpadminbar {
+    direction: ltr !important;
+}
+
+/* =====================================================
+   PRINT STYLES
+   ===================================================== */
+@media print {
+    .royita-header,
+    .royita-footer,
+    .dashboard-sidebar,
+    .btn,
+    .filter-sidebar {
+        display: none !important;
+    }
+
+    body {
+        font-size: 12pt;
+        color: #000;
+    }
+
+    .dashboard-content {
+        padding: 0;
+    }
+
+    .dashboard-stat-card {
+        break-inside: avoid;
+    }
+}
+
+/* =====================================================
+   DARK MODE SUPPORT (if needed in future)
+   ===================================================== */
+@media (prefers-color-scheme: dark) {
+    /* Intentionally empty - site uses light theme only */
+    /* Add dark mode tokens here when ready */
+}
+
+/* =====================================================
+   FOCUS STYLES (Accessibility)
+   ===================================================== */
+:focus-visible {
+    outline: 2px solid var(--royita-primary);
+    outline-offset: 2px;
+}
+
+button:focus-visible,
+a:focus-visible {
+    border-radius: var(--radius-sm);
+}
+
+/* Skip to content link */
+.skip-to-content {
+    position: absolute;
+    top: -100%;
+    right: var(--space-4);
+    background: var(--royita-primary);
+    color: #fff;
+    padding: var(--space-3) var(--space-5);
+    border-radius: var(--radius-md);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-semibold);
+    text-decoration: none;
+    z-index: calc(var(--z-tooltip) + 10);
+    transition: top var(--transition-fast);
+}
+
+.skip-to-content:focus {
+    top: var(--space-4);
+}
+
+/* =====================================================
+   HIGH CONTRAST MODE
+   ===================================================== */
+@media (forced-colors: active) {
+    .btn {
+        border: 2px solid ButtonText;
+    }
+
+    .badge {
+        border: 1px solid ButtonText;
+    }
+}
+
+/* =====================================================
+   RESPONSIVE - ADDITIONAL BREAKPOINTS
+   ===================================================== */
+@media (max-width: 1280px) {
+    .dashboard-stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .proposal-form__price-row {
+        grid-template-columns: 1fr;
+    }
+
+    .filter-sort-bar {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .royita-modal__box {
+        padding: var(--space-6);
+    }
+
+    .dashboard-table {
+        font-size: var(--font-size-xs);
+    }
+
+    .dashboard-table th,
+    .dashboard-table td {
+        padding: var(--space-2) var(--space-3);
+    }
+
+    .proposal-item {
+        flex-direction: column;
+    }
+
+    .proposal-item__actions {
+        flex-direction: row;
+        width: 100%;
+        justify-content: flex-end;
+    }
+}
+
+@media (max-width: 480px) {
+    .how-tabs {
+        width: 100%;
+        border-radius: var(--radius-lg);
+    }
+
+    .how-tab-btn {
+        flex: 1;
+        padding: var(--space-3) var(--space-4);
+        font-size: var(--font-size-sm);
+    }
+
+    .tab-nav {
+        overflow-x: auto;
+        scrollbar-width: none;
+    }
+
+    .tab-nav::-webkit-scrollbar {
+        display: none;
+    }
+}
