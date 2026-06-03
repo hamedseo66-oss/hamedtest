@@ -297,3 +297,74 @@ function royita_notify_new_message(int $from_user_id, int $to_user_id, string $m
         royita_email_headers()
     );
 }
+
+// =====================================================
+// NOTIFY DELIVERABLE SUBMITTED (کریتور فایل آپلود کرد)
+// =====================================================
+function royita_notify_deliverable_submitted(int $project_id): void {
+    $campaign_id   = (int) get_post_meta($project_id, 'project_campaign', true);
+    $brand_user_id = (int) get_post_meta($project_id, 'project_brand_id', true);
+    $campaign_title = get_the_title($campaign_id);
+    $brand_email   = get_the_author_meta('user_email', $brand_user_id);
+    $brand_name    = get_the_author_meta('display_name', $brand_user_id);
+
+    if (!$brand_email) return;
+
+    $content = '
+        <h2>فایل تحویلی آپلود شد 📁</h2>
+        <p>سلام <strong>' . esc_html($brand_name) . '</strong>،</p>
+        <p>کریتور پروژه "<strong>' . esc_html($campaign_title) . '</strong>" فایل نهایی را آپلود کرده است.</p>
+        <p>لطفاً فایل را بررسی و تایید یا درخواست ویرایش نمایید.</p>
+        <a href="' . esc_url(home_url('/brand/project/?id=' . $project_id)) . '" class="email-btn">مشاهده و بررسی فایل</a>
+    ';
+
+    $subject = sprintf('فایل تحویلی پروژه "%s" آماده بررسی است', $campaign_title);
+    wp_mail($brand_email, $subject, royita_email_template($subject, $content), royita_email_headers());
+}
+
+// =====================================================
+// NOTIFY REVISION REQUESTED (برند درخواست ویرایش داد)
+// =====================================================
+function royita_notify_revision_requested(int $project_id, string $note): void {
+    $campaign_id     = (int) get_post_meta($project_id, 'project_campaign', true);
+    $creator_user_id = (int) get_post_meta($project_id, 'project_creator_id', true);
+    $campaign_title  = get_the_title($campaign_id);
+    $creator_email   = get_the_author_meta('user_email', $creator_user_id);
+    $creator_name    = get_the_author_meta('display_name', $creator_user_id);
+
+    if (!$creator_email) return;
+
+    $content = '
+        <h2>درخواست ویرایش دریافت شد ✏️</h2>
+        <p>سلام <strong>' . esc_html($creator_name) . '</strong>،</p>
+        <p>برند پروژه "<strong>' . esc_html($campaign_title) . '</strong>" درخواست ویرایش ارسال کرده است.</p>
+        <div class="email-info-box">
+            <p><strong>توضیحات برند:</strong><br>' . nl2br(esc_html($note)) . '</p>
+        </div>
+        <a href="' . esc_url(home_url('/creator/project/?id=' . $project_id)) . '" class="email-btn">مشاهده پروژه</a>
+    ';
+
+    $subject = sprintf('درخواست ویرایش برای پروژه "%s"', $campaign_title);
+    wp_mail($creator_email, $subject, royita_email_template($subject, $content), royita_email_headers());
+}
+
+// =====================================================
+// NOTIFY DISPUTE OPENED (اختلاف ثبت شد)
+// =====================================================
+function royita_notify_dispute_opened(int $project_id, string $reason): void {
+    $campaign_id = (int) get_post_meta($project_id, 'project_campaign', true);
+    $campaign_title = get_the_title($campaign_id);
+    $admin_email = get_option('admin_email');
+
+    $content = '
+        <h2>اختلاف جدید ثبت شد ⚠️</h2>
+        <p>یک اختلاف برای پروژه "<strong>' . esc_html($campaign_title) . '</strong>" (شناسه: ' . $project_id . ') ثبت شده است.</p>
+        <div class="email-info-box">
+            <p><strong>دلیل:</strong><br>' . nl2br(esc_html($reason)) . '</p>
+        </div>
+        <a href="' . esc_url(admin_url('post.php?post=' . $project_id . '&action=edit')) . '" class="email-btn">بررسی در پنل ادمین</a>
+    ';
+
+    $subject = sprintf('اختلاف پروژه #%d — "%s"', $project_id, $campaign_title);
+    wp_mail($admin_email, $subject, royita_email_template($subject, $content), royita_email_headers());
+}
